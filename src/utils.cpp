@@ -15,26 +15,19 @@ vector<int> eratosthenesSieve(int bound){
     exit(1);
   }
   
-  vector<int> numberList(bound+1,true);
-  for(int i=0; i<=bound; i++)
-    numberList[i] = i;
-
+  vector<bool> numberList(bound+1,true);
+  
   int testNumber = 2;
-  int remaining = bound;
   auto t1 = Clock::now();
   while(testNumber<=sqrt(bound)){
     // we start with testNumber=2. we "mark" (by setting them to zero) the numbers that
     // are multiples of testNumber : 2p, 3p, etc. until we reach bound.
-    for(int mark=2*testNumber; mark<=bound; mark+=testNumber){
-      if(numberList[mark]!=0){
-        numberList[mark] = 0;
-        remaining--; // gives us the number of non-marked numbers in the list
-      }
-    }
+    for(int mark=2*testNumber; mark<=bound; mark+=testNumber)
+        numberList[mark] = false;
 
     // finding the next non marked (non zero) number in the list
     testNumber++;
-    while(numberList[testNumber] == 0){
+    while(numberList[testNumber] == false){
       testNumber++;
     }
   }
@@ -42,10 +35,10 @@ vector<int> eratosthenesSieve(int bound){
   cout << "sieve loop : " << std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() << " ms" << endl;
   int j = 0;
   t1 = Clock::now();
-  vector<int> primeList(remaining-1);
+  vector<int> primeList(bound);
   for(int i=2; i<=bound; i++){
-    if(numberList[i] != 0){
-      primeList[j] = numberList[i];
+    if(numberList[i] != false){
+      primeList[j] = i;
       j++;
     }
   }
@@ -94,4 +87,89 @@ map<int,int> primeFactorization(int nToFactorize){
   auto t2 = Clock::now();
   cout << "factorization loop : " << chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << "ms" << endl;
   return primesAndExponents;
+}
+
+
+deque<int> sommeGrandsNombres(deque<int> a, deque<int> b)
+{
+  deque<int> resultat;
+
+  if(a.size() > b.size())
+  {
+    int tailleMax = a.size();
+    int tailleMin = b.size();
+    int diff = tailleMax - tailleMin;
+
+    resultat.resize(tailleMax);
+
+    int retenue = 0;    
+    for(int i=tailleMin-1; i>=0; i--)
+    {
+      int somme = a[i+diff] + b[i] + retenue;
+      if(somme>=10)
+      {
+        retenue = 1;
+        somme -= 10;
+      }
+      else
+        retenue = 0;
+
+      resultat[i+diff] = somme;
+    }
+    for(int i=diff-1; i>=0; i--)
+    {
+      int somme = a[i] + retenue;
+      if(somme>=10)
+      {
+        retenue = 1;
+        somme -= 10;
+      }
+      else
+        retenue = 0;
+
+      resultat[i] = somme;
+    }
+
+    if(retenue == 1) resultat.push_front(retenue);
+  }
+  else
+  {
+    int tailleMax = b.size();
+    int tailleMin = a.size();
+    int diff = tailleMax - tailleMin;
+
+    resultat.resize(tailleMax);
+
+    int retenue = 0;    
+    for(int i=tailleMin-1; i>=0; i--)
+    {
+      int somme = a[i] + b[i+diff] + retenue;
+      if(somme>=10)
+      {
+        retenue = 1;
+        somme -= 10;
+      }
+      else
+        retenue = 0;
+
+      resultat[i+diff] = somme;
+    }
+    for(int i=diff-1; i>=0; i--)
+    {
+      int somme = b[i] + retenue;
+      if(somme>=10)
+      {
+        retenue = 1;
+        somme -= 10;
+      }
+      else
+        retenue = 0;
+
+      resultat[i] = somme;
+    }
+
+    if(retenue == 1) resultat.push_front(retenue);
+  }
+
+  return resultat;
 }

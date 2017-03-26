@@ -1,6 +1,10 @@
 COMP=g++
+<<<<<<< HEAD
 CXXFLAGS=-O2 -W -Wall -ansi -pedantic -std=c++11
 debug: CXXFLAGS+=-DDEBUG -g 
+=======
+CFLAGS=-Wall -ansi -pedantic -std=c++11
+>>>>>>> e4476e461c0d657be059391726b0e17b41b5dc88
 LDFLAGS=
 
 OBJ = obj/

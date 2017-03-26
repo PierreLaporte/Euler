@@ -2,28 +2,17 @@
 
 int main(){
   
-  int triangNb = 0;
+  int triangNb;
   int nOfFactors = 0;
-  int add = 1;
-  map<int,int> primesAndExp;
-  
+  int n=2;
   while(nOfFactors <= 500){
-	  triangNb += add;
-	  add++;
-    //cout << "n = " << triangNb << endl;	  
-	  primesAndExp = primeFactorization(triangNb);
-	  nOfFactors = 1;
-
-    
-    //cout << "number : " << triangNb << " =====> " ;  
-    /*for(auto &element : primesAndExp){
-      cout << " x " << element.first << "^" << element.second;
-	  }
-    cout << endl;*/
-	  for(auto &element : primesAndExp){
-		  nOfFactors *= element.second+1;
-	  }
-    //cout << "nb of factors = " << nOfFactors << endl;
+	  triangNb = 0.5*n*(n-1); 
+    cout << "n = " << triangNb << endl;	  
+	  nOfFactors = 2;
+    int sqrtTriNbr = sqrt(triangNb);
+    for(int k=2; k<sqrtTriNbr; k++)
+      if(triangNb%k==0) nOfFactors+=2;
+    n++;
   }
   
   cout << "triangular number :  " << triangNb << " ==> nb of factors : " << nOfFactors << endl << "Bye!" << endl;
