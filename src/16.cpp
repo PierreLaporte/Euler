@@ -16,7 +16,7 @@ int main()
 	
 	int sum = 0;
 	cout << "result : ";
-	for(int i=0; i<result.size(); i++)
+	for(unsigned int i=0; i<result.size(); i++)
 	{
 		sum += result[i];
 		cout << result[i];

@@ -20,9 +20,9 @@ int main()
 	}
 
 	cout << "pyramid : " << endl;
-	for(int i=0; i<pyramid.size(); i++)
+	for(unsigned int i=0; i<pyramid.size(); i++)
 	{
-		for(int j=0; j<pyramid[i].size(); j++)
+		for(unsigned int j=0; j<pyramid[i].size(); j++)
 		{
 			cout << pyramid[i][j] << " "; 
 		}
@@ -30,9 +30,9 @@ int main()
 	}
 
 	// we start from the second bottom row of the pyramid i.e. pyramid.size()-2  
-	for(int row=pyramid.size()-2; row>=0; row--)
+	for(unsigned int row=pyramid.size()-2; row>=0; row--)
 	{
-		for(int col=0; col<pyramid[row].size(); col++)
+		for(unsigned int col=0; col<pyramid[row].size(); col++)
 		{
 			/* for each element in the row, we add the value of the biggest of the 2 elements 
 			   below, to the element's own value */

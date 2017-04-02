@@ -11,7 +11,7 @@ int main(int argc, char *argv[]){
   
   vector<int> primes = eratosthenesSieve(n);
   
-  for(int i=0; i<primes.size(); i++){
+  for(unsigned int i=0; i<primes.size(); i++){
     cout << primes[i] << " ";
   }
   cout << endl;
